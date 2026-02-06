@@ -25,7 +25,11 @@ assignees: TypeErrorDev
 ## ✅ Definition of Done
 > [!IMPORTANT]
 > **What does "finished" look like?**
-- [ ] - [ ] - [ ] ---
+- [ ] Problem solved
+- [ ] With what actions
+- [ ] Wish list
+
+---
 > [!NOTE]
 > **Future Considerations:** ```
 
