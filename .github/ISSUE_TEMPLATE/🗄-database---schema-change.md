@@ -9,10 +9,14 @@ assignees: TypeErrorDev
 
 ## 📐 Schema Change
 > [!CAUTION]
-> **Description:** ## 📝 Proposed Changes
+> **Description:** 
+
+## 📝 Proposed Changes
 - **Table:** ``
 - **Action:** ``
-- **RLS Policies:** ## 🛠 Migration Steps
+- **RLS Policies:** 
+
+## 🛠 Migration Steps
 1. [ ] Backup / Export current data (if needed).
 2. [ ] Run SQL migration script.
 3. [ ] Update TypeScript types/interfaces in the frontend.
