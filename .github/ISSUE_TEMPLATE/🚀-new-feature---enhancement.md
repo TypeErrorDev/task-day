@@ -10,9 +10,13 @@ assignees: TypeErrorDev
 ## 💡 The "Big Idea"
 > [!TIP]
 > **User Story:** As a user, I want to [action] so that [benefit].
-> **Goal:** ## 🛠 Proposed Implementation
+> **Goal:** 
+
+## 🛠 Proposed Implementation
 * **Affected Components:** ``
-* **Technical Approach:** ## 📝 Roadmap & Tasks
+* **Technical Approach:** 
+
+## 📝 Roadmap & Tasks
 - [ ] Research & Documentation
 - [ ] Initial UI/UX implementation
 - [ ] Logic & Backend integration
