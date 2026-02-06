@@ -1,8 +1,8 @@
 ---
 name: "\U0001F41B Technical Bug Report"
 about: Detailed technical breakdown for future-proofing.
-title: "[bug"
-labels: bug
+title: "[bug]"
+labels: bug, maintenance
 assignees: TypeErrorDev
 
 ---
