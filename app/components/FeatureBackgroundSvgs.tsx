@@ -9,8 +9,8 @@ export default function FeatureBackgroundSvgs() {
         alt=""
         width={64}
         height={64}
-        className="absolute opacity-20"
-        style={{ top: "8%", left: "6%" }}
+        className="absolute opacity-40"
+        style={{ top: "15%", left: "6%" }}
       />
 
       {/* Top-right */}
@@ -19,8 +19,8 @@ export default function FeatureBackgroundSvgs() {
         alt=""
         width={56}
         height={56}
-        className="absolute opacity-20"
-        style={{ top: "12%", right: "8%" }}
+        className="absolute opacity-40"
+        style={{ top: "15%", right: "8%" }}
       />
 
       {/* Middle-left (outside card zone) */}
@@ -29,7 +29,7 @@ export default function FeatureBackgroundSvgs() {
         alt=""
         width={72}
         height={72}
-        className="absolute opacity-15"
+        className="absolute opacity-40"
         style={{ top: "50%", left: "4%", transform: "translateY(-50%)" }}
       />
 
@@ -39,7 +39,7 @@ export default function FeatureBackgroundSvgs() {
         alt=""
         width={60}
         height={60}
-        className="absolute opacity-20"
+        className="absolute opacity-40"
         style={{ bottom: "10%", left: "10%" }}
       />
 
@@ -49,7 +49,7 @@ export default function FeatureBackgroundSvgs() {
         alt=""
         width={68}
         height={68}
-        className="absolute opacity-20"
+        className="absolute opacity-40"
         style={{ bottom: "12%", right: "6%" }}
       />
     </div>

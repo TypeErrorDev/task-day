@@ -10,15 +10,15 @@ function CTA() {
           TaskDay
         </span>
       </h1>
-      <p className="text-[#535151c9] font-bold  text-start mt-20 text-[22px]">
+      <p className="text-[#535151c9] italic font-bold  text-start mt-10 text-[22px]">
         Streamline your workflow, boost productivity, and <br />
         never miss a deadline. The ultimate project tracking <br /> solution for
         developers, teams and hobbyists alike!!
       </p>
-      <div className="flex flex-col justify-center items-center md:flex-row sm:my-5">
-        <Link href="/register">
+      <div className="flex flex-col justify-center items-center md:flex-row my-10">
+        <Link href="/waitlist">
           <button className="bg-linear-to-br from-[#6C38CA] from-40% to-[#B28FF1] shadow-md text-white font-semibold h-9 w-80 my-4 rounded-md hover:transition-transform hover:scale-[1.02] hover:bg-slate-800 md:w-60 md:mx-4">
-            Get Started For Free <span className="font-bold h-4 w-3">→</span>
+            Join the Wait List <span className="font-bold h-4 w-3">→</span>
           </button>
         </Link>
         <Link href="/login">
