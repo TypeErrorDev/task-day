@@ -1,4 +1,5 @@
 import CTA from "./CTA";
+import Features from "./Features";
 import WaitlistTopBar from "./WaitlistTopBar";
 
 function Waitlist() {
@@ -6,6 +7,7 @@ function Waitlist() {
     <>
       <WaitlistTopBar />
       <CTA />
+      <Features />
     </>
   );
 }
