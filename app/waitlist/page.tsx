@@ -5,16 +5,28 @@ import { useState } from "react";
 
 function Waitlist() {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleJoin = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
-    const { data, error } = await supabase.from("waitlist").insert([{ email }]);
+    const emailValidation = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailValidation.test(email)) {
+      alert("Please enter a valid email address.");
+      setLoading(false);
+      return;
+    }
+    const { error } = await supabase.from("waitlist").insert([{ email }]);
 
     if (error) {
-      console.error("Error Joining:", error.message);
-    } else {
-      alert("You're on the list!");
+      if (error.code === "23505") {
+        alert("This email is already on the waitlist!");
+      } else {
+        console.error("Error while joining:", error.message);
+        setEmail("");
+      }
+      setLoading(false);
     }
   };
 
@@ -91,15 +103,16 @@ function Waitlist() {
                 placeholder="Enter your email address..."
                 name="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value.toLowerCase())}
                 className="border border-gray-400 h-12 w-100 rounded-lg px-3 my-5 "
                 required
               />
               <button
                 type="submit"
+                disabled={loading}
                 className="bg-linear-to-br from-[#6C38CA] from-40% to-[#B28FF1] shadow-md shadow-purple-200 text-white font-semibold h-12 w-full mt-2 rounded-md  md:mx-4 md:w-96  hover:transition-transform hover:scale-[1.02] hover:bg-[#faf9f9]"
               >
-                Join our Waitlist
+                {loading ? "Joining..." : "Join our Waitlist"}
               </button>
             </form>
           </div>
