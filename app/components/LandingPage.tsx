@@ -1,3 +1,4 @@
+import ActiveStats from "./ActiveStats";
 import CTA from "./CTA";
 import Features from "./Features";
 import LandingPageTopBar from "./LandingPageTopBar";
@@ -8,6 +9,7 @@ function LandingPage() {
       <LandingPageTopBar />
       <CTA />
       <Features />
+      <ActiveStats />
     </>
   );
 }
