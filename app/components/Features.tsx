@@ -1,4 +1,5 @@
 import FeatureBackgroundSvgs from "./FeatureBackgroundSvgs";
+import Image from "next/image";
 
 function Features() {
   const featureCards = {
@@ -44,10 +45,12 @@ function Features() {
                 key={key}
                 className="relative z-20 bg-white rounded-lg shadow-md p-6 w-90"
               >
-                <img
+                <Image
                   src={image}
                   alt={`${title} icon`}
-                  className="w-12 h-12 mb-4"
+                  className="mb-4"
+                  width={48}
+                  height={48}
                 />
                 <h2 className="text-xl font-bold mb-2">{title}</h2>
                 <p className="text-gray-600">{description}</p>
