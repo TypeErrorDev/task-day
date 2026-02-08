@@ -11,21 +11,34 @@ function Waitlist() {
     e.preventDefault();
     setLoading(true);
 
-    const emailValidation = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailValidation.test(email)) {
+    // 1. Validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
       alert("Please enter a valid email address.");
       setLoading(false);
       return;
     }
-    const { error } = await supabase.from("waitlist").insert([{ email }]);
 
-    if (error) {
-      if (error.code === "23505") {
-        alert("This email is already on the waitlist!");
+    try {
+      // 2. Insert into Supabase
+      const { error } = await supabase.from("waitlist").insert([{ email }]);
+
+      if (error) {
+        if (error.code === "23505") {
+          alert("This email is already on the waitlist!");
+        } else {
+          alert("Something went wrong. Please try again.");
+        }
       } else {
-        console.error("Error while joining:", error.message);
+        alert("Success! You're on the list!");
         setEmail("");
       }
+    } catch (err) {
+      // This catches the "Failed to fetch" network errors seen in your console
+      console.error("Network Error:", err);
+      alert("Check your internet connection or Supabase settings.");
+    } finally {
+      // This runs NO MATTER WHAT, unlocking the button
       setLoading(false);
     }
   };
