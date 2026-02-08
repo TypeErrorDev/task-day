@@ -1,26 +1,23 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { supabase } from "../createClient";
 
 function dashboard() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    // Fetch projects from your backend or database
-    const fetchProjects = async () => {
-      try {
-        const response = await fetch("/api/projects");
-        const data = await response.json();
-        setProjects(data);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      }
-    };
-
     fetchProjects();
   }, []);
 
-  console.log("Projects:", projects);
+  const fetchProjects = async () => {
+    const { data, error } = await supabase.from("projects").select("*");
+    if (error) {
+      console.error("Error fetching projects:", error);
+      return [];
+    }
+    console.log("Fetched projects:", data);
+  };
 
   return (
     <div className="flex flex-col justify-center items-center text-center h-screen w-screen text-black bg-[#EFF6FF]">
