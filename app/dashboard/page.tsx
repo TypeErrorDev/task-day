@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { supabase } from "../createClient";
-import TopNav from "../components/dashboard/TopNav";
+import SideNav from "../components/dashboard/SideNav";
 
 function dashboard() {
   const [projects, setProjects] = useState<any[]>([]);
@@ -28,9 +28,9 @@ function dashboard() {
   }, []);
 
   return (
-    <div className="p-4">
-      <TopNav />
-      <h2 className="text-2xl font-bold mb-4 text-black">Your Projects</h2>
+    <div>
+      <SideNav />
+      {/* <h2 className="text-2xl font-bold mb-4 text-black">Your Projects</h2>
       {projects.length === 0 ? (
         <p className="text-black">No projects found. Time to create one!</p>
       ) : (
@@ -49,7 +49,7 @@ function dashboard() {
             </li>
           ))}
         </ul>
-      )}
+      )} */}
     </div>
   );
 }
