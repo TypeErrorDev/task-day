@@ -24,7 +24,7 @@ function Login() {
       if (error) {
         alert(error.message);
       } else if (data.user) {
-        router.push("/dashboard");
+        router.push("/home");
         router.refresh();
       }
     } catch (err) {
