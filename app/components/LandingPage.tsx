@@ -1,4 +1,4 @@
-import ActiveStats from "./ActiveStats";
+// import ActiveStats from "./ActiveStats";
 import CTA from "./CTA";
 import CTABottom from "./CTABottom";
 import Features from "./Features";
@@ -10,7 +10,7 @@ function LandingPage() {
       {/* <LandingPageTopBar /> */}
       <CTA />
       <Features />
-      <ActiveStats />
+      {/* <ActiveStats /> */}
       <CTABottom />
     </>
   );
