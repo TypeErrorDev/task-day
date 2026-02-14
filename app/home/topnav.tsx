@@ -1,5 +1,5 @@
-// app/home/topnav.tsx
 "use client";
+
 import {
   BellIcon,
   Cog6ToothIcon,
@@ -45,7 +45,7 @@ export default function TopNav() {
 
   return (
     <header className="h-16 border-b border-gray-200 bg-white flex items-center justify-between px-8 shrink-0">
-      {/* 1. Left Section: User & Breadcrumb */}
+      {/* Left Section: User & Breadcrumb */}
       <div className="flex items-center gap-4 shrink-0 w-100 p-5 ">
         <h2 className="text-sm font-medium text-black">
           Welcome, <span className="text-black font-bold">{userName}</span>
@@ -56,14 +56,13 @@ export default function TopNav() {
         </nav>
       </div>
 
-      {/* 2. Middle Section: Search Bar (flew-1 allows it to take up the middle space) */}
+      {/* Middle Section: Search Bar (flew-1 allows it to take up the middle space) */}
       <div className="flex-1 flex justify-center px-4">
         <form
           action="search"
           method="GET"
           className="relative w-full max-w-md flex items-center"
         >
-          {/* Try pl-4 or pl-10 if you add an icon back later */}
           <input
             name="search"
             type="search"
@@ -73,7 +72,7 @@ export default function TopNav() {
         </form>
       </div>
 
-      {/* 3. Right Section: Notification & Settings */}
+      {/* Right Section: Notification & Settings */}
       <div className="flex items-center gap-4 text-gray-500">
         <button className="p-2 hover:bg-gray-100 rounded-full transition-all hover:scale-110">
           <BellIcon className="size-6 text-gray-600" />
