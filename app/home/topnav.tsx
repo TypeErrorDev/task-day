@@ -48,7 +48,7 @@ export default function TopNav() {
       {/* Left Section: User & Breadcrumb */}
       <div className="flex items-center gap-4 shrink-0 w-100 p-5 ">
         <h2 className="text-sm font-medium text-black">
-          Welcome, <span className="text-black font-bold">{userName}</span>
+          <span className="text-black font-bold">{userName}</span>
         </h2>
         <span className="text-gray-300">|</span>
         <nav className="text-sm font-semibold text-[#6C38CA]">
@@ -67,7 +67,7 @@ export default function TopNav() {
             name="search"
             type="search"
             placeholder="Search..."
-            className="w-full border border-gray-300 bg-gray-50 px-4 p-1 text-black focus:ring-2 focus:ring-[#6C38CA] focus:bg-white outline-none transition-all sm:text-sm box-border rounded-md"
+            className="w-full border border-gray-300 bg-gray-50 px-4 p-1 text-black focus:ring-2 focus:ring-[#6C38CA] focus:bg-white outline-none transition-all sm:text-sm box-border rounded-md placeholder-transparent sm:placeholder-gray-400"
           />
         </form>
       </div>

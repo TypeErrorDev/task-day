@@ -30,7 +30,7 @@ function SideNav() {
   }
 
   return (
-    <div className="flex flex-col p-5 border-r border-gray-400 h-screen w-64 shrink-0 bg-white">
+    <div className="flex flex-col p-5 border-r border-gray-100 h-screen w-64 shrink-0 bg-white">
       {/* Logo */}
       <div className="flex justify-center items-center">
         <Image
