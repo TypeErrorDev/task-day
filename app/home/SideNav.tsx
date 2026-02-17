@@ -12,6 +12,8 @@ import {
   UsersIcon,
   XMarkIcon,
   CurrencyDollarIcon,
+  CalendarDaysIcon,
+  CreditCardIcon,
 } from "@heroicons/react/24/outline";
 
 function SideNav() {
@@ -22,6 +24,8 @@ function SideNav() {
     { name: "Clients", href: "/home/clients", icon: UsersIcon },
     { name: "Jobs", href: "/home/jobs", icon: FolderIcon },
     { name: "Quotes", href: "/home/quotes", icon: CurrencyDollarIcon },
+    { name: "Scheduler", href: "/home/scheduler", icon: CalendarDaysIcon },
+    { name: "Invoices", href: "/home/invoices", icon: CreditCardIcon },
     { name: "Analytics", href: "/home/analytics", icon: ChartPieIcon },
   ];
 
