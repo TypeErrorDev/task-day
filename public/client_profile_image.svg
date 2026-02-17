@@ -1,0 +1,27 @@
+<svg viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="300" y2="160" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f5f0ff"/>
+      <stop offset="100%" stop-color="#ede9fe"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="60" y1="30" x2="200" y2="140" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f9f7ff"/>
+    </linearGradient>
+    <filter id="shadow1" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#8b5cf6" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  <rect width="300" height="160" rx="10" fill="url(#bg1)"/>
+  <circle cx="260" cy="20" r="40" fill="#c4b5fd" fill-opacity="0.25"/>
+  <circle cx="30" cy="140" r="30" fill="#a78bfa" fill-opacity="0.2"/>
+  <rect x="60" y="28" width="180" height="104" rx="12" fill="url(#card1)" filter="url(#shadow1)" stroke="#e4d9ff" stroke-width="1"/>
+  <circle cx="150" cy="68" r="26" fill="#ede9fe" stroke="#c4b5fd" stroke-width="2"/>
+  <circle cx="150" cy="60" r="9" fill="#8b5cf6"/>
+  <path d="M127 92 Q127 78 150 78 Q173 78 173 92" fill="#8b5cf6" fill-opacity="0.5"/>
+  <rect x="110" y="102" width="80" height="6" rx="3" fill="#c4b5fd"/>
+  <rect x="125" y="114" width="50" height="4" rx="2" fill="#ddd6fe"/>
+  <circle cx="168" cy="56" r="10" fill="#7c3aed"/>
+  <rect x="163" y="54.5" width="10" height="3" rx="1.5" fill="white"/>
+  <rect x="166.5" y="51" width="3" height="10" rx="1.5" fill="white"/>
+</svg>

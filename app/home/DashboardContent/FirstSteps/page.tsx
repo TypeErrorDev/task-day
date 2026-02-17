@@ -3,71 +3,120 @@
 import { useState, useEffect } from "react";
 import { useUser } from "@/app/context/UserContext";
 import { supabase } from "@/app/createClient";
+import { useRouter } from "next/navigation";
 
+// Define the interface for your card data
 interface FirstStepCard {
   id: string;
   name: string;
-  image_url: string;
+  image_url: string | null;
+  link: string | null;
   created_at?: string;
-  link: string;
+}
+
+// Define the interface for the user profile record
+interface UserProfile {
+  username: string;
 }
 
 function FirstSteps() {
   const { user, loading } = useUser();
   const [firstCards, setFirstCards] = useState<FirstStepCard[]>([]);
-
-  // TODO: create a grid/flexbox container for 3x9 of cards that'll basically walk the user through creating a client -> creating a project -> adding tasks/employees -> invoicing the client after projects complete -> other helpful cards for analytics or communication with the client within the dashboard
+  const [username, setUsername] = useState<string>("");
+  const router = useRouter();
 
   useEffect(() => {
-    const fetchCards = async () => {
-      const { data } = await supabase
+    const fetchData = async () => {
+      // 1. Fetch Cards with typed response
+      const { data: cards, error: cardError } = await supabase
         .from("firstStepCards")
         .select("*")
-        .order("created_at", { ascending: false });
+        .order("created_at", { ascending: true });
 
-      if (data) setFirstCards(data);
+      if (cards) setFirstCards(cards as FirstStepCard[]);
+      if (cardError) console.error("Error fetching cards:", cardError.message);
+
+      // 2. Fetch User Profile with typed response
+      if (user?.id) {
+        const { data: profile, error: profileError } = await supabase
+          .from("users")
+          .select("username")
+          .eq("id", user.id)
+          .single();
+
+        if (profile) setUsername((profile as UserProfile).username);
+        if (profileError)
+          console.error("Error fetching profile:", profileError.message);
+      }
     };
-    fetchCards();
-  }, []);
 
-  if (loading) return <div>Checking session...</div>;
-  if (!user) return <div>Guest</div>;
+    if (!loading && user) {
+      fetchData();
+    } else if (!loading && !user) {
+      router.push("/login");
+    }
+  }, [user, loading, router]);
+
+  // Transform the image_url string into a full public URL
+  const getImageUrl = (path: string | null): string => {
+    if (!path) return "";
+
+    const { data } = supabase.storage
+      .from("firstStepsImages")
+      .getPublicUrl(path);
+
+    return data.publicUrl;
+  };
+
+  if (loading || !user) return <div className="p-8">Syncing roadmap...</div>;
 
   return (
-    <div>
-      {/* Header Container */}
-      <div className="my-5">
-        <h1 className="text-4xl font-bold">
-          Welcome, {user.user_metadata.full_name || user.email}
+    <div className="p-8 max-w-7xl mx-auto">
+      <div className="mb-10">
+        <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+          Welcome, {username || "Guest"}
         </h1>
-        <p className="text-md text-slate-500 font-semibold">
-          Here is a <span className="font-bold text-black">custom plan</span>{" "}
-          just for you and your company!
+        <p className="text-gray-500 mt-1">
+          Select a card to manage your tasks.
         </p>
       </div>
-      {/* Cards container */}
-      <div className="flex justify-between flex-wrap gap-4">
-        {/* Cards */}
-        {firstCards.length > 0 ? (
-          firstCards.map((card) => (
-            //
-            // Card Container
-            <div className="border border-gray-200 rounded-md h-80 w-64 transition delay-150 duration-300 ease-in-out hover:-translate-y-2 hover:scale-101 hover:duration-450 shadow-lg shadow-black/20  cursor-pointer">
-              {/* Image container */}
-              <div className="bg-slate-100 h-2/3 flex items-center justify-center border-b border-gray-300 rounded-t-md">
-                <span className="tex-slate-400">Image Goes Here</span>
-              </div>
-              {/* Card Info */}
-              <div className="p-4 h-1/3">
-                <h2 className="text-sm font-semibold leading-tight">
-                  {card.name}
-                </h2>
-              </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
+        {firstCards.map((card) => (
+          <a
+            key={card.id}
+            href={card.link || "#"}
+            className="group border border-gray-200 rounded-3xl h-80 flex flex-col bg-white overflow-hidden shadow-sm transition-all duration-300 ease-out hover:shadow-xl hover:-translate-y-2"
+          >
+            {/* Top 2/3: Image section */}
+            <div className="h-2/3 bg-slate-50 relative overflow-hidden flex items-center justify-center border-b border-gray-100 p-6">
+              {card.image_url ? (
+                <img
+                  src={getImageUrl(card.image_url)}
+                  alt={card.name}
+                  className="w-full h-full object-contain"
+                  onError={(e) => {
+                    console.error(`Missing asset: ${card.image_url}`);
+                  }}
+                />
+              ) : (
+                <div className="w-full h-full bg-slate-200 flex items-center justify-center text-slate-400 font-bold uppercase text-xs">
+                  No Image
+                </div>
+              )}
             </div>
-          ))
-        ) : (
-          <p className="text-slate-400">No steps found in your plan yet.</p>
-        )}
+
+            {/* Bottom 1/3: Title Area */}
+            <div className="p-6 h-1/3 flex items-center bg-white justify-between">
+              <h2 className="text-lg font-bold text-slate-800 group-hover:text-blue-600 transition-colors duration-300">
+                {card.name}
+              </h2>
+              <span className="text-2xl text-slate-300 group-hover:text-blue-600 transition-all duration-300 transform group-hover:translate-x-1">
+                →
+              </span>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   );

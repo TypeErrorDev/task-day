@@ -36,7 +36,7 @@ export async function proxy(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   if (!user && request.nextUrl.pathname.startsWith("/home")) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/waitlist", request.url));
   }
 
   return response;
