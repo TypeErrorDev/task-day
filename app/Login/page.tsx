@@ -4,6 +4,7 @@ import { useState } from "react";
 import { supabase } from "../createClient";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { signIn } from "./actions";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,6 +15,16 @@ function Login() {
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    const result = await signIn(formData);
+    if (result?.error) {
+      alert(result.error);
+      setLoading(false);
+    } else {
+      router.push("/home");
+      router.refresh();
+    }
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
