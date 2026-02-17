@@ -1,37 +1,37 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useUser } from "@/app/context/UserContext";
+import { supabase } from "@/app/createClient";
 
 interface FirstStepCard {
+  id: string;
   name: string;
-  image: string;
+  image_url: string;
+  created_at?: string;
+  link: string;
 }
 
 function FirstSteps() {
   const { user, loading } = useUser();
-  if (loading) return <div>Checking session...</div>;
-  if (!user) return <div>Guest</div>;
+  const [firstCards, setFirstCards] = useState<FirstStepCard[]>([]);
 
   // TODO: create a grid/flexbox container for 3x9 of cards that'll basically walk the user through creating a client -> creating a project -> adding tasks/employees -> invoicing the client after projects complete -> other helpful cards for analytics or communication with the client within the dashboard
 
-  const firstStepsCards: FirstStepCard[] = [
-    { name: "Manage every aspect of your jobs", image: "placeholder" },
-    { name: "Send your invoices with confidence", image: "placeholder" },
-    { name: "Creating your client profile", image: "placeholder" },
-    {
-      name: "Send quotes blazingly fast and with a professional look",
-      image: "placeholder",
-    },
-    { name: "Allocate your manhours for every task/job", image: "placeholder" },
-    {
-      name: "View your analytics in a visually appealing and easily digestable dashboard",
-      image: "placeholder",
-    },
-    {
-      name: "Add employees to your team dynamically",
-      image: "placeholder",
-    },
-  ];
+  useEffect(() => {
+    const fetchCards = async () => {
+      const { data } = await supabase
+        .from("firstStepCards")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (data) setFirstCards(data);
+    };
+    fetchCards();
+  }, []);
+
+  if (loading) return <div>Checking session...</div>;
+  if (!user) return <div>Guest</div>;
 
   return (
     <div>
@@ -48,21 +48,26 @@ function FirstSteps() {
       {/* Cards container */}
       <div className="flex justify-between flex-wrap gap-4">
         {/* Cards */}
-        {firstStepsCards.map((card) => (
-          // Card Container
-          <div className="border rounded-md h-80 w-64 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-101 hover:duration-450 shadow-lg cursor-pointer">
-            {/* Image container */}
-            <div className="bg-slate-100 h-2/3 flex items-center justify-center border-b rounded-t-md">
-              <span className="tex-slate-400">Image Goes Here</span>
+        {firstCards.length > 0 ? (
+          firstCards.map((card) => (
+            //
+            // Card Container
+            <div className="border border-gray-200 rounded-md h-80 w-64 transition delay-150 duration-300 ease-in-out hover:-translate-y-2 hover:scale-101 hover:duration-450 shadow-lg shadow-black/20  cursor-pointer">
+              {/* Image container */}
+              <div className="bg-slate-100 h-2/3 flex items-center justify-center border-b border-gray-300 rounded-t-md">
+                <span className="tex-slate-400">Image Goes Here</span>
+              </div>
+              {/* Card Info */}
+              <div className="p-4 h-1/3">
+                <h2 className="text-sm font-semibold leading-tight">
+                  {card.name}
+                </h2>
+              </div>
             </div>
-            {/* Card Info */}
-            <div className="p-4 h-1/3">
-              <h2 className="text-sm font-semibold leading-tight">
-                {card.name}
-              </h2>
-            </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p className="text-slate-400">No steps found in your plan yet.</p>
+        )}
       </div>
     </div>
   );
