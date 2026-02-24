@@ -2,13 +2,13 @@
 
 import { BellIcon, Cog6ToothIcon } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation"; // Added useRouter
+import { usePathname, useRouter } from "next/navigation";
 import { supabase } from "../createClient";
-import { signOut } from "../login/actions"; // 1. Import your Server Action
+import { signOut } from "../login/actions";
 
 export default function TopNav() {
   const pathname = usePathname();
-  const router = useRouter(); // Initialize router
+  const router = useRouter();
   const [userName, setUserName] = useState("Loading...");
 
   const fetchUserData = async () => {
@@ -31,17 +31,9 @@ export default function TopNav() {
 
   const handleSignOut = async () => {
     try {
-      // 1. Clear Server-Side Cookies via the Server Action
       await signOut();
-
-      // 2. Clear Client-Side LocalStorage
-      // Use .clear() to wipe everything, or .removeItem() for specific keys
       window.localStorage.clear();
-
-      // Optional: Clear SessionStorage as well for a total reset
       window.sessionStorage.clear();
-
-      // 3. Redirect and Refresh
       router.push("/login");
       router.refresh();
     } catch (err) {

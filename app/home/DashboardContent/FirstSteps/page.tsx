@@ -71,7 +71,7 @@ function FirstSteps() {
   if (loading || !user) return <div className="p-8">Syncing roadmap...</div>;
 
   return (
-    <div className="p-8 max-w-7xl mx-auto">
+    <div className="p-8 max-w-7xl mx-auto outline outline-gray-200 rounded-3xl shadow-md bg-white">
       <div className="mb-10">
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
           Welcome, {username || "Guest"}

@@ -8,10 +8,32 @@ import { supabase } from "@/app/createClient";
 
 export interface Project {
   id: string | number;
-  project_name: string;
-  description: string;
   created_at: string;
+  project_name: string;
   last_updated: string;
+  user_id: string;
+  client_id: string;
+  task_id: string;
+  description: string;
+}
+
+export interface Clients {
+  id: string;
+  created_at: string;
+  phone: string;
+  email: string;
+  address: string;
+  user_id: string;
+  company_name: string;
+}
+
+export interface Tasks {
+  id: string;
+  create_at: string;
+  name: string;
+  status: string;
+  project_id: string;
+  user_id: string;
 }
 
 export default function Home() {
